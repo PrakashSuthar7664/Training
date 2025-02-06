@@ -77,25 +77,27 @@ function thour(arr) {
 }
 
 function calendarTimes(arr, arr2) {
+    let arr1 = arr.slice(0, 25)
   let result = [];
   let len;
   if (arr2 == 0) {
-    len = arr.length;
+    len = arr1.length;
   } else {
-    len = arr.length - 1;
+    len = arr1.length - 1;
   }
 
   let a = thour(arr);
   for (let i = 0; i < len; i++) {
-    if (arr[i] < 10) {
-      arr[i] = "0" + arr[i];
+    if (arr1[i] < 10) {
+      arr1[i] = "0" + arr1[i];
     }
 
-    result.push(
-      `{ id: '${arr[i]}:${arr2 < 10 ? "0" + arr2 : arr2}', name: '${
-        a[i] === 0 ? (a[i] = 12) : a[i]
-      }:${arr2 < 10 ? "0" + arr2 : arr2} ${arr[i] < 12 ? "AM" : "PM"}'}`
-    );
+    result.push({
+      id: `'${arr1[i]}:${arr2 < 10 ? "0" + arr2 : arr2}'`,
+      name: `'${a[i] === 0 ? (a[i] = 12) : a[i]}:${
+        arr2 < 10 ? "0" + arr2 : arr2
+      } ${arr1[i] < 12 ? "AM" : "PM"}'`,
+    });
   }
 
   console.log(result);
@@ -104,7 +106,7 @@ function calendarTimes(arr, arr2) {
 calendarTimes(
   [
     0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-    21, 22, 23, 24,
+    21, 22, 23, 24,25,26
   ],
-  [0]
+  [1]
 );
