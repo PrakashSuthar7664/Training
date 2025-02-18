@@ -499,5 +499,104 @@
 // insertWhitespace("MarvinTalksTooMuch") //➞ "Marvin Talks Too Much"
 // insertWhitespace("TheGreatestUpsetInHistory") //➞ "The Greatest Upset In History
 
+// function isOdd(num){
+//    if((num & 1)){
+//       console.log("Yes");
+//    }else{
+//       console.log("No"); 
+//    }
+// }
+
+// function isEven(num){
+//   let regEx = "^\d*[02468]$"
+//   if(num.match(regEx)){
+//    console.log("Yes");
+//   }else console.log("No")
+// }
+
+// isOdd(3) //➞ "Yes"
+// // Use Bitwise Operator
+
+// isOdd(58) //➞ "No"
+// // Use Bitwise Operator
+
+// isEven("0") //➞ "Yes"
+// // Use Regular Expression
+
+// isEven("-99") //➞ "No"
+// // Use Regular Expression
 
 
+// function findBrokenKeys(s1 ,s2){
+//    let dif = [] ;
+//    for(let i=0 ; i<s1.length ; i++){
+//          if(s1[i] !== s2[i]){
+//             if(!dif.includes(s1[i])){
+//                dif.push(s1[i]) ;
+//             }
+//          }
+//    }
+//    console.log(dif);  
+// }
+
+// findBrokenKeys("happy birthday", "hawwy birthday") //➞ ["p"]
+// findBrokenKeys("starry night", "starrq light") //➞ ["y", "n"]
+// findBrokenKeys("beethoven", "affthoif5") //➞ ["b", "e", "v", "n"]
+// findBrokenKeys("!!??$$", "$$!!??")
+// findBrokenKeys("5678", "4678")
+
+
+// doubleSwap = (str , a, b)=>{
+//    let arr = str.split("") ; 
+//   return  (arr.map(val => val == a ? val = b : val === b ? val = a : val )).join("")
+// }
+
+// console.log(doubleSwap( "aabbccc", "a", "b")) //➞ "bbaaccc"
+// console.log(doubleSwap("random w#rds writt&n h&r&", "#", "&"))
+// //➞ "random w&rds writt#n h#r#"
+// console.log(doubleSwap("128 895 556 788 999", "8", "9"))
+// //➞ "129 985 556 799 888"
+
+// function commonElements(arr , arr2){
+//   return arr2.filter(val => arr.includes(val))
+// }
+
+// console.log(commonElements([-1, 3, 4, 6, 7, 9], [1, 3])) //➞ [3]
+
+// console.log(commonElements([1, 3, 4, 6, 7, 9], [1, 2, 3, 4, 7, 10]) )//➞ [1, 3, 4, 7]
+
+// console.log(commonElements([1, 2, 2, 2, 3, 4, 5], [1, 2, 4, 5]) )//➞ [1, 2, 4, 5]
+
+// console.log(commonElements([1, 2, 3, 4, 5], [10, 12, 13, 15])) //➞ []
+
+
+function consecutiveCombo(arr1 , arr2){
+let newArr = arr1.concat(arr2).sort((a,b)=>a-b);
+let l = newArr.length -1
+
+let sum = 0 ;
+let sum1 = 0 ; 
+for(let i = newArr[0]  ; i<=newArr[l]; i++ ){
+   sum += i ;
+}
+for(let i=0 ; i<newArr.length ; i++){
+   sum1+=newArr[i] ;
+}
+
+if(sum == sum1 ){
+   return true ;
+}
+else {
+   return false ;
+}
+
+}
+
+
+console.log(consecutiveCombo([7, 4, 5, 1], [2, 3, 6]) )//➞ true
+
+console.log(consecutiveCombo([1, 4, 6, 5], [2, 7, 8, 9])) //➞ false
+
+console.log(consecutiveCombo([1, 4, 5, 6], [2, 3, 7, 8, 10])) //➞ false
+
+console.log(consecutiveCombo([44, 46], [45])) //➞ true
