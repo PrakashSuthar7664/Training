@@ -1,34 +1,23 @@
 <!DOCTYPE html>
-<html lang="en-US">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <title>Function scope example</title>
-  </head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
 <body>
 
-  <script>
-    const x = 1;
-
-    function a() {
-      const y = 2;
-      output(x);
-    }
-
-    function b() {
-      const z = 3;
-      output(x);
-    }
-    output(x);
-    a();
-b();
-
-
-    function output(value) {
-      const para = document.createElement('p');
-      document.body.appendChild(para);
-      para.textContent = `Value: ${value}`;
-    }
-  </script>
+   <form action="">
+       <input id="inp" type="text">
+    <input id="btn" type="submit">
+   </form>
+    
+<script>
+    let i = document.querySelector("#inp") ;
+    document.querySelector("#btn").addEventListener("click", function(){
+         console.log(i.target.value);
+         
+    })
+</script>
 </body>
 </html>

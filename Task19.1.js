@@ -13,5 +13,3 @@
 // console.log(fibStr(5, ["e", "a"]) )//➞ "e, a, ae, aea, aeaae"
 // console.log(fibStr(6, ["n", "k"])) //➞ "n, k, kn, knk, knkkn, knkknknk"
 
-
-

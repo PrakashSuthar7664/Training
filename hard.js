@@ -582,7 +582,6 @@ for(let i = newArr[0]  ; i<=newArr[l]; i++ ){
 for(let i=0 ; i<newArr.length ; i++){
    sum1+=newArr[i] ;
 }
-
 if(sum == sum1 ){
    return true ;
 }

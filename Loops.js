@@ -1,0 +1,34 @@
+let i = 0 ; 
+do{
+    i++;
+    console.log(i);
+}while(i<10);
+
+
+let x = 0;
+let z = 0;
+labelCancelLoops: while (true) {
+  console.log("Outer loops:", x);
+  x += 1;
+  z = 1;
+  while (true) {
+    console.log("Inner loops:", z);
+    z += 1;
+    if (z === 10 && x === 10) {
+      break labelCancelLoops;   //break through label
+    } else if (z === 10) {
+      break;
+    }
+  }
+}
+
+
+
+const obj = { foo: 1, bar: 2 };
+
+for (const [key, val] of Object.entries(obj)) {  //also destructuring 
+  console.log(key, val);
+}
+// "foo" 1
+// "bar" 2
+

@@ -1,5 +1,4 @@
 function a(str, ans = "") {
-  let result = [];
   if (str.length === 0) {
     console.log(ans);
     return;

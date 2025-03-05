@@ -10,7 +10,6 @@ function nearestChapter(obj , num){
         difference = diff ;
         a = key ; 
 
-        
      }
  }
 

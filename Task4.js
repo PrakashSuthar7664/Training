@@ -77,7 +77,7 @@ function thour(arr) {
 }
 
 function calendarTimes(arr, arr2) {
-    let arr1 = arr.slice(0, 25)
+  let arr1 = arr.slice(0, 25);
   let result = [];
   let len;
   if (arr2 == 0) {
@@ -106,7 +106,7 @@ function calendarTimes(arr, arr2) {
 calendarTimes(
   [
     0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-    21, 22, 23, 24,25,26
+    21, 22, 23, 24, 25, 26,
   ],
   [1]
 );

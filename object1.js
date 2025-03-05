@@ -1,5 +1,6 @@
 function ungroupStudents(arr){
-    return  arr.flatMap(({teacher,data})=>
+    return  arr.flatMap(({teacher,data})=>  
+          
      data.map(val => ({ teacher , ...val}))
     );
 }

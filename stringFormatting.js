@@ -8,7 +8,6 @@ function removeLastVowel(str) {
        }
     }
     return val ;
-   
   });
 
   console.log(newArr.join(" "));
