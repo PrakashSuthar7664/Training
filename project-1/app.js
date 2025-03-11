@@ -5,27 +5,22 @@ const port = 5001;
 app.use(express.json());
 app.use(express.urlencoded());
 
-async function checkvalid(email) {
-  const query = "SELECT * FROM users where email = ?";
-  db.execute(query, [email], (err, result) => {
-    if(result.length == 0) {
-        console.log("enter")
-      return true;
-    } 
-    if(result[0].email === email) {
-      return false;
-    } 
-    else{
-        return true ; 
-    }
+function checkvalid(email) {
+  return new Promise((resolve, reject) => {
+    const query = "SELECT * FROM users where email = ?";
+    db.execute(query, [email], (err, result) => {
+      if (result.length == 0) {
+        resolve(true);
+      } else if (result[0].email === email) {
+        resolve(false);
+      }
+    });
   });
 }
 
-app.post("/register", async(req, res) => {
+app.post("/register", async (req, res) => {
   const { name, email, password } = req.body;
-  console.log(name ,email);
-  let check = await checkvalid(email);
-  console.log(check,"'JJJJJJJJJJJJJJ")
+  const check = await checkvalid(email);
   if (!name || !email || !password) {
     res.send("name email and password fields required");
   }
@@ -33,7 +28,7 @@ app.post("/register", async(req, res) => {
     const query = "insert into users (name,email, password) values (?, ? ,?)";
     db.execute(query, [name, email, password], (err, result) => {
       if (err) {
-        res.json({ success: false, message: "Database error" });
+        res.json({ success: false, message: "Database connected error" });
       } else {
         res.json({ success: true, message: "Register Successfully" });
       }
@@ -51,7 +46,7 @@ app.post("/login", (req, res) => {
   const query = `SELECT * FROM users WHERE email = ?`;
   db.execute(query, [email], (err, result) => {
     if (err) {
-      res.json({ success: false, message: "Database error" });
+      res.json({ success: false, message: "Database connected error" });
     }
     if (result.length === 0) {
       res.json({
