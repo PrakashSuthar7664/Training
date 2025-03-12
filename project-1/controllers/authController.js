@@ -1,5 +1,8 @@
 const db = require("../server");
 const crypto = require("crypto");
+const bcrypt = require("bcrypt");
+const { promises } = require("dns");
+const { rejects } = require("assert");
 
 function checkvalid(email) {
   return new Promise((resolve, reject) => {
@@ -20,15 +23,28 @@ exports.getRegister = (req, res) => {
 
 exports.postRegister = async (req, res) => {
   const { name, email, password } = req.body;
-
   const check = await checkvalid(email);
   if (!name || !email || !password) {
     return res.send("name email and password fields required");
   }
-  let pass = crypto.createHmac("sha256" , email).update(password).digest("hex");
+  //   let pass = crypto.createHmac("sha256", email).update(password).digest("hex");
+  function encrypt(pass) {
+    return new Promise((resolve, reject) => {
+      const saltround = 10;
+      bcrypt.hash(pass, saltround, (err, hash) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(hash);
+        }
+      });
+    });
+  }
+
+  let hash = await encrypt(password);
   if (check) {
     const query = "insert into users (name,email, password) values (?, ? ,?)";
-    db.execute(query, [name, email, pass], (err, result) => {
+    db.execute(query, [name, email, hash], (err, result) => {
       if (err) {
         res.json({ success: false, message: "Database connected error" });
       } else {
@@ -58,41 +74,46 @@ exports.postLogin = (req, res) => {
   if (!email || !password) {
     return res.send("Email and Password fields required");
   }
-  
-  let pass = crypto.createHmac("sha256" , email).update(password).digest("hex");
+
+  //let pass = crypto.createHmac("sha256", email).update(password).digest("hex");
   const query = `SELECT * FROM users WHERE email = ?`;
   db.execute(query, [email], (err, result) => {
     if (err) {
       res.json({ success: false, message: "Database connected error" });
-    }
-    if (result.length === 0) {
+    } else if (result.length === 0) {
       return res.send(
         `<script>alert("Email not found! Please register first.")
-            window.location.href='/login';</script></script>
-            `
+     window.location.href='/login';</script></script>            `
       );
-
       //   res.json({
       //     success: false,
       //     message: "Invalid credentials",
       //   });
-    }
-    const user = result[0];
-    if (pass != user.password) {
-      //   res.json({
-      //     success: false,
-      //     message: "Invalid Password",
-      //   });
-      return res.send(
-        `<script>alert("Invalid Password")
-            window.location.href='/login';</script>`
-      );
     } else {
-      req.session.userinfo = result;
-      //   res.json({ success: true, message: "Login Successfully" });
-      req.session.message = "Login Successfully";
-      res.redirect("/");
+      const user = result[0];
+      bcrypt.compare(password, user.password, (err, dec) => {
+        if (err) throw err;
+
+        if (dec) {
+          req.session.userinfo = result;
+          // res.json({ success: true, message: "Login Successfully" });
+          req.session.message = "Login Successfully";
+          res.redirect("/");
+          console.log("success");
+        } else {
+          return res.send(
+            `<script>alert("Invalid Password")
+                        window.location.href='/login';</script>`
+          );
+        }
+      });
     }
+    //  else {
+    //   req.session.userinfo = result;
+    //   //   res.json({ success: true, message: "Login Successfully" });
+    //   req.session.message = "Login Successfully";
+    //   res.redirect("/");
+    // }
   });
 };
 
