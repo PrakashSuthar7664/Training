@@ -1,8 +1,5 @@
 const db = require("../server");
-const crypto = require("crypto");
 const bcrypt = require("bcrypt");
-const { promises } = require("dns");
-const { rejects } = require("assert");
 
 function checkvalid(email) {
   return new Promise((resolve, reject) => {
@@ -17,11 +14,11 @@ function checkvalid(email) {
   });
 }
 
-exports.getRegister = (req, res) => {
+const getRegister = (req, res) => {
   res.render("register");
 };
 
-exports.postRegister = async (req, res) => {
+const postRegister = async (req, res) => {
   const { name, email, password } = req.body;
   const check = await checkvalid(email);
   if (!name || !email || !password) {
@@ -65,11 +62,11 @@ exports.postRegister = async (req, res) => {
   }
 };
 
-exports.getLogin = (req, res) => {
+const getLogin = (req, res) => {
   res.render("login");
 };
 
-exports.postLogin = (req, res) => {
+const postLogin = (req, res) => {
   const { email, password } = req.body;
   if (!email || !password) {
     return res.send("Email and Password fields required");
@@ -92,10 +89,16 @@ exports.postLogin = (req, res) => {
     } else {
       const user = result[0];
       bcrypt.compare(password, user.password, (err, dec) => {
-        if (err) throw err;
+        if (err) {
+          return res.json({
+            success: false,
+            message: "Error verifying password",
+          });
+        }
 
         if (dec) {
           req.session.userinfo = result;
+          console.log(result);
           // res.json({ success: true, message: "Login Successfully" });
           req.session.message = "Login Successfully";
           res.redirect("/");
@@ -117,7 +120,9 @@ exports.postLogin = (req, res) => {
   });
 };
 
-exports.getLogout = (req, res) => {
+const getLogout = (req, res) => {
   req.session = null;
   res.redirect("/login");
 };
+
+module.exports = { getRegister, postRegister, getLogin, postLogin, getLogout };

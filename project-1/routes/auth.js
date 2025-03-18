@@ -2,16 +2,18 @@ const express = require("express");
 const route = express.Router();
 // const db = require("../server");
 // const cookiesession = require("cookie-session");
-const authcontroller = require('../controllers/authController')
+const {
+  getRegister,
+  postLogin,
+  postRegister,
+  getLogin,
+  getLogout,
+} = require("../controllers/authController");
 
-route.get("/register", authcontroller.getRegister);
-
-route.post("/register", authcontroller.postRegister);
-
-route.get("/login", authcontroller.getLogin);
-
-route.post("/login", authcontroller.postLogin);
-
-route.get("/logout", authcontroller.getLogout );
+route.get("/register", getRegister);
+route.post("/register", postRegister);
+route.get("/login", getLogin);
+route.post("/login", postLogin);
+route.get("/logout", getLogout);
 
 module.exports = route;

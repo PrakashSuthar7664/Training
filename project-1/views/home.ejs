@@ -7,7 +7,7 @@
   <title>Document</title>
 </head>
 
-<body>
+<body style="background-color: rgba(0, 0, 0, 0.121); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
   <% if (message) { %>
     <script>
       alert("<%= message %>");
@@ -15,14 +15,21 @@
     <% } %>
       <h4>
         <% if(details) { %>
-          Hello, <%= details %>!
+          Hello, <%= details%>! <br>
+            <a href="/list"
+              style="border:1px solid rgb(255, 255, 255) ; text-decoration: none; padding:1px 4px; border-radius: 1vh; color: azure; background-color: rgba(0, 0, 0, 0.784); font-weight:100; ">Show
+              List
+            </a>
             <% } else { %>
-              Welcome, guest! Please <a href="/login">Login</a>
-            <% } %>
+              Welcome, guest! Please <a
+                style="border:1px solid rgb(255, 255, 255) ; text-decoration: none; padding:1px 4px; border-radius: 1vh; color: azure; background-color: rgba(0, 0, 0, 0.784); font-weight:100; "
+                href="/login">Login</a>
+              <% } %>
       </h4>
 
 
-      <a href="/logout">logout</a>
+      <a style="border:1px solid rgb(255, 255, 255) ; text-decoration: none; padding:1px 4px; border-radius: 1vh; color: azure; background-color: rgba(0, 0, 0, 0.784); font-weight:100; "
+        href="/logout">Logout</a>
 
 </body>
 

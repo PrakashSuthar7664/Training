@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Your List</title>
+</head>
+
+<body style="background-color: rgba(0, 0, 0, 0.121); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+	<h1>Your List</h1>
+	<table border="1" style="border-collapse: collapse; border:1px solid black ; margin: 20px; ">
+		<tr>
+			<th>List</th>
+			<th>Delete</th>
+			<th>Edit</th>
+		</tr>
+		<% listdata.forEach(item=>{ %>
+			<tr>
+				<td>
+					<%= item.title %>
+				</td>
+				<td>
+					<form action="/deletelist/<%= item.id %>" method="POST" style="display:inline;">
+						<button type="submit"
+							style="border:1px solid rgb(255, 255, 255) ; text-decoration: none; padding:1px 4px; border-radius: 1vh; color: azure; background-color: rgba(0, 0, 0, 0.784); font-weight:100; cursor: pointer;">X</button>
+					</form>
+				</td>
+				<td>
+
+					<a style="border:1px solid rgb(255, 255, 255) ; text-decoration: none; padding:1px 4px; border-radius: 1vh; color: azure; background-color: rgba(0, 0, 0, 0.784); font-weight:100; cursor: pointer;"
+						href="/edit/<%= item.id %>">Edit</a>
+
+				</td>
+			</tr>
+			<% }) %>
+	</table>
+	<br>
+	<a style="border:1px solid rgb(255, 255, 255) ; text-decoration: none; padding:1px 4px; border-radius: 1vh; color: azure; background-color: rgba(0, 0, 0, 0.784); font-weight:100; "
+		href="/addlist">Add List</a>
+	<br>
+	<a style="border:1px solid rgb(255, 255, 255) ; text-decoration: none; padding:1px 4px; border-radius: 1vh; color: azure; background-color: rgba(0, 0, 0, 0.784); font-weight:100; "
+		href="/">Back to Home</a>
+</body>
+
+</html>
