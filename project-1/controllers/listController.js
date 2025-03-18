@@ -18,7 +18,6 @@ const getAddlist = (req, res) => {
 const postAddlist = (req, res) => {
   const userId = req.session.userinfo[0].idusers;
   const { list } = req.body;
-  console.log(list, userId);
   if (!list) {
     return res.send(
       `<script>alert("List Field Empty")
@@ -49,7 +48,18 @@ const deleteList = (req, res) => {
 
 const getEdit = (req, res) => {
   const { id } = req.params;
-  res.render("edit", { id: id });
+  const userId = req.session.userinfo[0].idusers;
+  const query = "select title from userlists where userid = ? and id = ? "
+  db.execute(query, [userId , id ] , (err,result)=>{
+    if(err){
+        return res.json({ success: false, message: "Database error" });
+    }
+    else{
+        let title = result[0].title ; 
+        res.render("edit", { id: id , title});
+    }
+  })
+
 };
 
 const postEdit = (req, res) => {

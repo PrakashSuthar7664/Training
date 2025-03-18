@@ -99,10 +99,11 @@ const postLogin = (req, res) => {
         if (dec) {
           req.session.userinfo = result;
           console.log(result);
-          // res.json({ success: true, message: "Login Successfully" });
           req.session.message = "Login Successfully";
-          res.redirect("/");
-          console.log("success");
+          return res.send(
+            `<script>alert("Login Successfully")
+             window.location.href='/';</script></script>            `
+          );
         } else {
           return res.send(
             `<script>alert("Invalid Password")

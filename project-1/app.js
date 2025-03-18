@@ -7,8 +7,8 @@ const authRoutes = require("./routes/auth");
 const listRoutes = require("./routes/list");
 
 const port = 5001;
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+// app.use(express.json());
+// app.use(express.urlencoded({ extended: true }));
 app.use(
   cookiesession({
     name: "session",
