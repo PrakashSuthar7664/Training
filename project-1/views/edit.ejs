@@ -8,12 +8,15 @@
 </head>
 
 <body style="background-color: rgba(0, 0, 0, 0.121); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
-    <form action="/edit/<%= id %>" , method="post">
+    <form action="/edit/<%= id %>" , method="post" enctype="multipart/form-data">
         <input type="text" placeholder="edit List" name="editlist" value="<%=title%>">
+        <input type="file" name="image">
         <input type="submit">
     </form>
     <br>
-    <a href="/list"  style="border:1px solid rgb(255, 255, 255) ; text-decoration: none; padding:1px 4px; border-radius: 1vh; color: azure; background-color: rgba(0, 0, 0, 0.784); font-weight:100; ">Show All Lists</a>
+    <a href="/list"
+        style="border:1px solid rgb(255, 255, 255) ; text-decoration: none; padding:1px 4px; border-radius: 1vh; color: azure; background-color: rgba(0, 0, 0, 0.784); font-weight:100; ">Show
+        All Lists</a>
 </body>
 
 </html>

@@ -7,14 +7,16 @@ const authRoutes = require("./routes/auth");
 const listRoutes = require("./routes/list");
 
 const port = 5001;
-// app.use(express.json());
-// app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(
   cookiesession({
     name: "session",
     keys: ["secretKeys"],
   })
 );
+app.use(express.static("public"));
+
 app.set("view engine", "ejs");
 app.use("/", homeRoutes);
 app.use("/", authRoutes);
