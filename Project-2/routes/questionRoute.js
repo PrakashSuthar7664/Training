@@ -1,12 +1,12 @@
 const express = require("express");
 const route = express.Router();
 const {
-  getQuestions,
-  postQuestions,
+  getQuestion,
+  postQuestion,
 } = require("../controllers/questionsController");
 
-route.get("/questions/:index", getQuestions);
+route.get("/questions/:index", getQuestion);
 
-route.post("/questions/:index", postQuestions);
+route.post("/questions/:index", postQuestion);
 
 module.exports = route;
